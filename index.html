@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solo Automation - Digital Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Base styles */
         :root {
             --primary-cyan: #00ffff;
             --primary-purple: #8b00ff;
             --accent-pink: #ff0080;
             --dark-bg: #0a0a0a;
+            --light-bg: #1a1a1a;
             --card-bg: #111111;
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
             --border-glow: rgba(0, 255, 255, 0.3);
             --shadow-glow: rgba(0, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -36,6 +37,21 @@
                 radial-gradient(circle at 40% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%);
             position: relative;
             overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+
+        body.light-theme {
+            --dark-bg: #f0f0f0;
+            --light-bg: #ffffff;
+            --card-bg: #f8f8f8;
+            --text-primary: #0a0a0a;
+            --text-secondary: #555555;
+            --border-glow: rgba(139, 0, 255, 0.3);
+            background: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 50%);
         }
 
         body::before {
@@ -56,6 +72,16 @@
             z-index: 1;
         }
 
+        body.light-theme::before {
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(139, 0, 255, 0.03) 2px,
+                rgba(139, 0, 255, 0.03) 4px
+            );
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -64,10 +90,65 @@
             z-index: 2;
         }
 
+        /* Header styles */
         .header {
             text-align: center;
             margin-bottom: 60px;
             position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
 
         .glitch {
@@ -86,6 +167,14 @@
             animation: flicker 3s infinite;
         }
 
+        body.light-theme .glitch {
+            color: var(--primary-purple);
+            text-shadow: 
+                0 0 10px rgba(139, 0, 255, 0.3),
+                0 0 20px rgba(139, 0, 255, 0.2),
+                0 0 40px rgba(139, 0, 255, 0.1);
+        }
+
         @keyframes flicker {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.8; }
@@ -99,6 +188,7 @@
             letter-spacing: 0.05em;
         }
 
+        /* Card grid styles */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -117,6 +207,10 @@
             backdrop-filter: blur(10px);
         }
 
+        body.light-theme .cyber-card {
+            border: 1px solid rgba(139, 0, 255, 0.2);
+        }
+
         .cyber-card::before {
             content: '';
             position: absolute;
@@ -126,6 +220,10 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
             transition: left 0.5s ease;
+        }
+
+        body.light-theme .cyber-card::before {
+            background: linear-gradient(90deg, transparent, var(--primary-purple), transparent);
         }
 
         .cyber-card:hover::before {
@@ -138,6 +236,13 @@
                 0 0 20px var(--shadow-glow),
                 inset 0 0 20px rgba(0, 255, 255, 0.1);
             transform: translateY(-5px);
+        }
+
+        body.light-theme .cyber-card:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 
+                0 0 20px rgba(139, 0, 255, 0.2),
+                inset 0 0 20px rgba(139, 0, 255, 0.1);
         }
 
         .card-header {
@@ -159,6 +264,10 @@
             position: relative;
         }
 
+        body.light-theme .card-icon {
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
+        }
+
         .card-title {
             font-family: 'Orbitron', monospace;
             font-size: 1.4rem;
@@ -166,6 +275,10 @@
             color: var(--primary-cyan);
             text-transform: uppercase;
             letter-spacing: 0.05em;
+        }
+
+        body.light-theme .card-title {
+            color: var(--primary-purple);
         }
 
         .card-subtitle {
@@ -193,9 +306,19 @@
             transition: all 0.3s ease;
         }
 
+        body.light-theme .service-chip {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
+            border: 1px solid rgba(139, 0, 255, 0.3);
+            color: var(--primary-purple);
+        }
+
         .service-chip:hover {
             background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(139, 0, 255, 0.2));
             transform: scale(1.05);
+        }
+
+        body.light-theme .service-chip:hover {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.2), rgba(255, 0, 128, 0.2));
         }
 
         .contact-info {
@@ -212,6 +335,10 @@
             border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
+        body.light-theme .contact-item {
+            border-bottom: 1px solid rgba(139, 0, 255, 0.1);
+        }
+
         .contact-icon {
             width: 30px;
             height: 30px;
@@ -221,6 +348,10 @@
             justify-content: center;
             clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
             font-size: 14px;
+        }
+
+        body.light-theme .contact-icon {
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
         }
 
         .social-links {
@@ -245,6 +376,12 @@
             overflow: hidden;
         }
 
+        body.light-theme .social-btn {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
+            border: 1px solid rgba(139, 0, 255, 0.3);
+            color: var(--primary-purple);
+        }
+
         .social-btn::before {
             content: '';
             position: absolute;
@@ -254,6 +391,10 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
+        }
+
+        body.light-theme .social-btn::before {
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 255, 0.2), transparent);
         }
 
         .social-btn:hover::before {
@@ -266,6 +407,12 @@
             box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
         }
 
+        body.light-theme .social-btn:hover {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.2), rgba(255, 0, 128, 0.2));
+            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.3);
+        }
+
+        /* Projects section */
         .projects-section {
             margin-top: 80px;
         }
@@ -282,6 +429,10 @@
             position: relative;
         }
 
+        body.light-theme .section-title {
+            color: var(--primary-purple);
+        }
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -291,6 +442,10 @@
             width: 100px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+        }
+
+        body.light-theme .section-title::after {
+            background: linear-gradient(90deg, transparent, var(--primary-purple), transparent);
         }
 
         .projects-grid {
@@ -308,6 +463,10 @@
             overflow: hidden;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+        }
+
+        body.light-theme .project-card {
+            border: 1px solid rgba(139, 0, 255, 0.2);
         }
 
         .project-card::before {
@@ -335,6 +494,13 @@
             transform: translateY(-5px);
         }
 
+        body.light-theme .project-card:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 
+                0 10px 30px rgba(139, 0, 255, 0.2),
+                inset 0 0 20px rgba(139, 0, 255, 0.1);
+        }
+
         .project-header {
             display: flex;
             align-items: center;
@@ -353,6 +519,10 @@
             clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
         }
 
+        body.light-theme .project-icon {
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
+        }
+
         .project-title {
             font-family: 'Orbitron', monospace;
             font-size: 1.2rem;
@@ -360,6 +530,10 @@
             color: var(--primary-cyan);
             text-transform: uppercase;
             letter-spacing: 0.05em;
+        }
+
+        body.light-theme .project-title {
+            color: var(--primary-purple);
         }
 
         .project-description {
@@ -386,6 +560,12 @@
             clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
         }
 
+        body.light-theme .tech-badge {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
+            border: 1px solid rgba(139, 0, 255, 0.3);
+            color: var(--primary-purple);
+        }
+
         .project-links {
             display: flex;
             gap: 15px;
@@ -405,6 +585,12 @@
             overflow: hidden;
         }
 
+        body.light-theme .project-link {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
+            border: 1px solid rgba(139, 0, 255, 0.3);
+            color: var(--primary-purple);
+        }
+
         .project-link::before {
             content: '';
             position: absolute;
@@ -414,6 +600,10 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
+        }
+
+        body.light-theme .project-link::before {
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 255, 0.2), transparent);
         }
 
         .project-link:hover::before {
@@ -426,6 +616,174 @@
             box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
         }
 
+        body.light-theme .project-link:hover {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.2), rgba(255, 0, 128, 0.2));
+            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.3);
+        }
+
+        /* New sections */
+        .section-spacer {
+            height: 80px;
+        }
+
+        .process-section {
+            margin: 80px 0;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .process-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .process-card {
+            border: 1px solid rgba(139, 0, 255, 0.2);
+        }
+
+        .process-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        body.light-theme .process-number {
+            color: var(--primary-purple);
+        }
+
+        .process-card h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .process-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        body.light-theme .process-card:hover {
+            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.2);
+        }
+
+        .stats-section {
+            margin: 80px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .stat-card {
+            border: 1px solid rgba(139, 0, 255, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            margin-bottom: 10px;
+        }
+
+        body.light-theme .stat-number {
+            color: var(--primary-purple);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        body.light-theme .stat-card:hover {
+            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.2);
+        }
+
+        .clients-section {
+            margin: 80px 0;
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .client-logo {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-bg);
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .client-logo {
+            border: 1px solid rgba(139, 0, 255, 0.1);
+        }
+
+        .client-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+            border-color: var(--primary-cyan);
+        }
+
+        body.light-theme .client-logo:hover {
+            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.2);
+            border-color: var(--primary-purple);
+        }
+
+        .client-logo img {
+            max-width: 100%;
+            max-height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .client-logo:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* CTA section */
         .cta-section {
             text-align: center;
             margin-top: 80px;
@@ -434,6 +792,11 @@
             border: 1px solid rgba(0, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
+        }
+
+        body.light-theme .cta-section {
+            background: linear-gradient(135deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
+            border: 1px solid rgba(139, 0, 255, 0.3);
         }
 
         .cta-section::before {
@@ -445,6 +808,10 @@
             bottom: 0;
             background: linear-gradient(45deg, rgba(0, 255, 255, 0.05), rgba(139, 0, 255, 0.05));
             animation: pulse 3s infinite;
+        }
+
+        body.light-theme .cta-section::before {
+            background: linear-gradient(45deg, rgba(139, 0, 255, 0.05), rgba(255, 0, 128, 0.05));
         }
 
         @keyframes pulse {
@@ -464,6 +831,17 @@
             z-index: 1;
         }
 
+        body.light-theme .cta-title {
+            color: var(--primary-purple);
+        }
+
+        /* Dropdown button styles */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+            z-index: 10;
+        }
+
         .cta-btn {
             display: inline-block;
             padding: 15px 40px;
@@ -478,6 +856,13 @@
             transition: all 0.3s ease;
             position: relative;
             z-index: 1;
+            border: none;
+            cursor: pointer;
+        }
+
+        body.light-theme .cta-btn {
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
+            color: white;
         }
 
         .cta-btn:hover {
@@ -485,22 +870,162 @@
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
         }
 
+        body.light-theme .cta-btn:hover {
+            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.4);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 250px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 10px;
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.95) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        body.light-theme .dropdown-content {
+            border: 1px solid rgba(139, 0, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.2);
+        }
+
+        .dropdown-container:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--primary-cyan);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        body.light-theme .dropdown-content a {
+            color: var(--primary-purple);
+        }
+
+        .dropdown-content a:before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        body.light-theme .dropdown-content a:before {
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 255, 0.2), transparent);
+        }
+
+        .dropdown-content a:hover:before {
+            left: 100%;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        body.light-theme .dropdown-content a:hover {
+            background: rgba(139, 0, 255, 0.1);
+        }
+
+        .dropdown-content a i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+
+        .dropdown-content a:first-child {
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        body.light-theme .dropdown-content a:first-child {
+            border-bottom: 1px solid rgba(139, 0, 255, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        body.light-theme .footer {
+            border-top: 1px solid rgba(139, 0, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-cyan);
+        }
+
+        body.light-theme .footer-link:hover {
+            color: var(--primary-purple);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .glitch {
                 font-size: 2.5rem;
             }
             
             .card-grid,
-            .projects-grid {
+            .projects-grid,
+            .process-grid,
+            .stats-grid,
+            .clients-grid {
                 grid-template-columns: 1fr;
             }
             
-            .social-links {
+            .social-links,
+            .project-links {
                 flex-direction: column;
             }
             
-            .project-links {
-                flex-direction: column;
+            .cta-section {
+                padding: 30px 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -508,6 +1033,14 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="theme-toggle">
+                <span>Dark</span>
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+                <span>Light</span>
+            </div>
             <h1 class="glitch">SOLO AUTOMATION</h1>
             <p class="tagline">// DIGITAL SOLUTIONS FOR THE FUTURE //</p>
         </div>
@@ -646,36 +1179,164 @@
             </div>
         </div>
 
+        <!-- Process Section -->
+        <div class="process-section">
+            <h2 class="section-title">OUR PROCESS</h2>
+            <div class="process-grid">
+                <div class="process-card">
+                    <span class="process-number">1</span>
+                    <h3>Discovery</h3>
+                    <p>Understand your workflow and identify automation opportunities through detailed analysis.</p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">2</span>
+                    <h3>Design</h3>
+                    <p>Create technical blueprint and timeline for your custom automation solution.</p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">3</span>
+                    <h3>Development</h3>
+                    <p>Agile implementation with continuous feedback loops and progress updates.</p>
+                </div>
+                <div class="process-card">
+                    <span class="process-number">4</span>
+                    <h3>Deployment</h3>
+                    <p>Seamless launch with documentation and 30-day maintenance support.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <h2 class="section-title">OUR IMPACT</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10k+</div>
+                    <div class="stat-label">Hours Saved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Retention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Avg. Efficiency Gain</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clients Section -->
+        <div class="clients-section">
+            <h2 class="section-title">TRUSTED BY INDUSTRY LEADERS</h2>
+            <div class="clients-grid">
+                <div class="client-logo">
+                    <span>TechCorp</span>
+                </div>
+                <div class="client-logo">
+                    <span>DataSolutions</span>
+                </div>
+                <div class="client-logo">
+                    <span>FinTech Global</span>
+                </div>
+                <div class="client-logo">
+                    <span>InnovateX</span>
+                </div>
+                <div class="client-logo">
+                    <span>AutoSystems</span>
+                </div>
+                <div class="client-logo">
+                    <span>CloudNine</span>
+                </div>
+            </div>
+        </div>
+
         <div class="cta-section">
             <h2 class="cta-title">READY TO AUTOMATE?</h2>
-            <a href="#" class="cta-btn">START PROJECT</a>
+            <div class="dropdown-container">
+                <button class="cta-btn">START PROJECT</button>
+                <div class="dropdown-content">
+                    <a href="#" id="emailBtn"><i class="fas fa-envelope"></i> SEND EMAIL</a>
+                    <a href="#" id="callBtn"><i class="fas fa-phone"></i> PLACE A CALL</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Documentation</a>
+                <a href="#" class="footer-link">Blog</a>
+            </div>
+            <p class="copyright">© 2023 Solo Automation. All rights reserved.</p>
         </div>
     </div>
 
     <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('light-theme');
+            
+            // Save preference to localStorage
+            if (document.body.classList.contains('light-theme')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.checked = true;
+        }
+
         // Cyberpunk animations and effects
         document.addEventListener('DOMContentLoaded', function() {
             // Glitch effect for title
             const glitchText = document.querySelector('.glitch');
             setInterval(() => {
                 if (Math.random() > 0.95) {
-                    glitchText.style.textShadow = `
-                        ${Math.random() * 5}px 0 #ff0080,
-                        ${Math.random() * -5}px 0 #00ffff,
-                        0 0 20px #00ffff
-                    `;
-                    setTimeout(() => {
+                    const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+                    if (currentTheme === 'dark') {
                         glitchText.style.textShadow = `
-                            0 0 10px var(--primary-cyan),
-                            0 0 20px var(--primary-cyan),
-                            0 0 40px var(--primary-cyan)
+                            ${Math.random() * 5}px 0 #ff0080,
+                            ${Math.random() * -5}px 0 #00ffff,
+                            0 0 20px #00ffff
                         `;
+                    } else {
+                        glitchText.style.textShadow = `
+                            ${Math.random() * 5}px 0 #ff0080,
+                            ${Math.random() * -5}px 0 #8b00ff,
+                            0 0 20px #8b00ff
+                        `;
+                    }
+                    
+                    setTimeout(() => {
+                        if (currentTheme === 'dark') {
+                            glitchText.style.textShadow = `
+                                0 0 10px var(--primary-cyan),
+                                0 0 20px var(--primary-cyan),
+                                0 0 40px var(--primary-cyan)
+                            `;
+                        } else {
+                            glitchText.style.textShadow = `
+                                0 0 10px rgba(139, 0, 255, 0.3),
+                                0 0 20px rgba(139, 0, 255, 0.2),
+                                0 0 40px rgba(139, 0, 255, 0.1)
+                            `;
+                        }
                     }, 150);
                 }
             }, 3000);
 
             // Floating animation for cards
-            const cards = document.querySelectorAll('.cyber-card, .project-card');
+            const cards = document.querySelectorAll('.cyber-card, .project-card, .process-card, .stat-card');
             cards.forEach((card, index) => {
                 setInterval(() => {
                     const offset = Math.sin(Date.now() * 0.001 + index) * 3;
@@ -683,33 +1344,22 @@
                 }, 50);
             });
 
-            // Cursor trail effect
-            const cursor = document.createElement('div');
-            cursor.style.cssText = `
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                background: radial-gradient(circle, rgba(0,255,255,0.6) 0%, transparent 70%);
-                pointer-events: none;
-                z-index: 9999;
-                border-radius: 50%;
-                mix-blend-mode: difference;
-                transition: all 0.1s ease;
-            `;
-            document.body.appendChild(cursor);
+            // Contact functionality
+            const emailBtn = document.getElementById('emailBtn');
+            const callBtn = document.getElementById('callBtn');
 
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX - 10 + 'px';
-                cursor.style.top = e.clientY - 10 + 'px';
+            emailBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const email = 'soloautomations@proton.me';
+                const subject = 'Project Inquiry';
+                const body = 'Hello Solo Automation,\n\nI\'m interested in discussing a project.\n\n[Briefly describe your needs]';
+                window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             });
 
-            // Hide cursor on mouse leave
-            document.addEventListener('mouseleave', () => {
-                cursor.style.opacity = '0';
-            });
-
-            document.addEventListener('mouseenter', () => {
-                cursor.style.opacity = '1';
+            callBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const phoneNumber = '+15615273900';
+                window.location.href = `tel:${phoneNumber}`;
             });
         });
     </script>
