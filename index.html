@@ -40,48 +40,6 @@
             transition: background 0.5s ease;
         }
 
-        body.light-theme {
-            --dark-bg: #f0f0f0;
-            --light-bg: #ffffff;
-            --card-bg: #f8f8f8;
-            --text-primary: #0a0a0a;
-            --text-secondary: #555555;
-            --border-glow: rgba(139, 0, 255, 0.3);
-            background: var(--dark-bg);
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 50%);
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 255, 255, 0.03) 2px,
-                rgba(0, 255, 255, 0.03) 4px
-            );
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        body.light-theme::before {
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(139, 0, 255, 0.03) 2px,
-                rgba(139, 0, 255, 0.03) 4px
-            );
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -167,14 +125,6 @@
             animation: flicker 3s infinite;
         }
 
-        body.light-theme .glitch {
-            color: var(--primary-purple);
-            text-shadow: 
-                0 0 10px rgba(139, 0, 255, 0.3),
-                0 0 20px rgba(139, 0, 255, 0.2),
-                0 0 40px rgba(139, 0, 255, 0.1);
-        }
-
         @keyframes flicker {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.8; }
@@ -207,10 +157,6 @@
             backdrop-filter: blur(10px);
         }
 
-        body.light-theme .cyber-card {
-            border: 1px solid rgba(139, 0, 255, 0.2);
-        }
-
         .cyber-card::before {
             content: '';
             position: absolute;
@@ -220,10 +166,6 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
             transition: left 0.5s ease;
-        }
-
-        body.light-theme .cyber-card::before {
-            background: linear-gradient(90deg, transparent, var(--primary-purple), transparent);
         }
 
         .cyber-card:hover::before {
@@ -236,13 +178,6 @@
                 0 0 20px var(--shadow-glow),
                 inset 0 0 20px rgba(0, 255, 255, 0.1);
             transform: translateY(-5px);
-        }
-
-        body.light-theme .cyber-card:hover {
-            border-color: var(--primary-purple);
-            box-shadow: 
-                0 0 20px rgba(139, 0, 255, 0.2),
-                inset 0 0 20px rgba(139, 0, 255, 0.1);
         }
 
         .card-header {
@@ -264,10 +199,6 @@
             position: relative;
         }
 
-        body.light-theme .card-icon {
-            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
-        }
-
         .card-title {
             font-family: 'Orbitron', monospace;
             font-size: 1.4rem;
@@ -275,10 +206,6 @@
             color: var(--primary-cyan);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-        }
-
-        body.light-theme .card-title {
-            color: var(--primary-purple);
         }
 
         .card-subtitle {
@@ -306,19 +233,9 @@
             transition: all 0.3s ease;
         }
 
-        body.light-theme .service-chip {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
-            border: 1px solid rgba(139, 0, 255, 0.3);
-            color: var(--primary-purple);
-        }
-
         .service-chip:hover {
             background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(139, 0, 255, 0.2));
             transform: scale(1.05);
-        }
-
-        body.light-theme .service-chip:hover {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.2), rgba(255, 0, 128, 0.2));
         }
 
         .contact-info {
@@ -335,10 +252,6 @@
             border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
-        body.light-theme .contact-item {
-            border-bottom: 1px solid rgba(139, 0, 255, 0.1);
-        }
-
         .contact-icon {
             width: 30px;
             height: 30px;
@@ -348,10 +261,6 @@
             justify-content: center;
             clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
             font-size: 14px;
-        }
-
-        body.light-theme .contact-icon {
-            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
         }
 
         .social-links {
@@ -376,12 +285,6 @@
             overflow: hidden;
         }
 
-        body.light-theme .social-btn {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
-            border: 1px solid rgba(139, 0, 255, 0.3);
-            color: var(--primary-purple);
-        }
-
         .social-btn::before {
             content: '';
             position: absolute;
@@ -393,10 +296,6 @@
             transition: left 0.5s ease;
         }
 
-        body.light-theme .social-btn::before {
-            background: linear-gradient(90deg, transparent, rgba(139, 0, 255, 0.2), transparent);
-        }
-
         .social-btn:hover::before {
             left: 100%;
         }
@@ -405,11 +304,6 @@
             background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(139, 0, 255, 0.2));
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-        }
-
-        body.light-theme .social-btn:hover {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.2), rgba(255, 0, 128, 0.2));
-            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.3);
         }
 
         /* Projects section */
@@ -429,10 +323,6 @@
             position: relative;
         }
 
-        body.light-theme .section-title {
-            color: var(--primary-purple);
-        }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -442,10 +332,6 @@
             width: 100px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
-        }
-
-        body.light-theme .section-title::after {
-            background: linear-gradient(90deg, transparent, var(--primary-purple), transparent);
         }
 
         .projects-grid {
@@ -463,10 +349,6 @@
             overflow: hidden;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-        }
-
-        body.light-theme .project-card {
-            border: 1px solid rgba(139, 0, 255, 0.2);
         }
 
         .project-card::before {
@@ -494,13 +376,6 @@
             transform: translateY(-5px);
         }
 
-        body.light-theme .project-card:hover {
-            border-color: var(--primary-purple);
-            box-shadow: 
-                0 10px 30px rgba(139, 0, 255, 0.2),
-                inset 0 0 20px rgba(139, 0, 255, 0.1);
-        }
-
         .project-header {
             display: flex;
             align-items: center;
@@ -519,10 +394,6 @@
             clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
         }
 
-        body.light-theme .project-icon {
-            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
-        }
-
         .project-title {
             font-family: 'Orbitron', monospace;
             font-size: 1.2rem;
@@ -530,10 +401,6 @@
             color: var(--primary-cyan);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-        }
-
-        body.light-theme .project-title {
-            color: var(--primary-purple);
         }
 
         .project-description {
@@ -560,12 +427,6 @@
             clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
         }
 
-        body.light-theme .tech-badge {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
-            border: 1px solid rgba(139, 0, 255, 0.3);
-            color: var(--primary-purple);
-        }
-
         .project-links {
             display: flex;
             gap: 15px;
@@ -585,12 +446,6 @@
             overflow: hidden;
         }
 
-        body.light-theme .project-link {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
-            border: 1px solid rgba(139, 0, 255, 0.3);
-            color: var(--primary-purple);
-        }
-
         .project-link::before {
             content: '';
             position: absolute;
@@ -602,10 +457,6 @@
             transition: left 0.5s ease;
         }
 
-        body.light-theme .project-link::before {
-            background: linear-gradient(90deg, transparent, rgba(139, 0, 255, 0.2), transparent);
-        }
-
         .project-link:hover::before {
             left: 100%;
         }
@@ -614,11 +465,6 @@
             background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(139, 0, 255, 0.2));
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-        }
-
-        body.light-theme .project-link:hover {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.2), rgba(255, 0, 128, 0.2));
-            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.3);
         }
 
         /* New sections */
@@ -646,10 +492,6 @@
             transition: all 0.3s ease;
         }
 
-        body.light-theme .process-card {
-            border: 1px solid rgba(139, 0, 255, 0.2);
-        }
-
         .process-number {
             font-family: 'Orbitron', monospace;
             font-size: 2rem;
@@ -657,10 +499,6 @@
             color: var(--primary-cyan);
             margin-bottom: 15px;
             display: block;
-        }
-
-        body.light-theme .process-number {
-            color: var(--primary-purple);
         }
 
         .process-card h3 {
@@ -680,8 +518,56 @@
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
         }
 
-        body.light-theme .process-card:hover {
-            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.2);
+        /* Contact buttons in process section */
+        .process-contact {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(139, 0, 255, 0.1));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .process-contact h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            color: var(--primary-cyan);
+            margin-bottom: 20px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+            color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .call-btn {
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
         }
 
         .stats-section {
@@ -703,20 +589,12 @@
             transition: all 0.3s ease;
         }
 
-        body.light-theme .stat-card {
-            border: 1px solid rgba(139, 0, 255, 0.2);
-        }
-
         .stat-number {
             font-family: 'Orbitron', monospace;
             font-size: 3rem;
             font-weight: 700;
             color: var(--primary-cyan);
             margin-bottom: 10px;
-        }
-
-        body.light-theme .stat-number {
-            color: var(--primary-purple);
         }
 
         .stat-label {
@@ -727,10 +605,6 @@
         .stat-card:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
-        }
-
-        body.light-theme .stat-card:hover {
-            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.2);
         }
 
         .clients-section {
@@ -755,19 +629,10 @@
             transition: all 0.3s ease;
         }
 
-        body.light-theme .client-logo {
-            border: 1px solid rgba(139, 0, 255, 0.1);
-        }
-
         .client-logo:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
             border-color: var(--primary-cyan);
-        }
-
-        body.light-theme .client-logo:hover {
-            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.2);
-            border-color: var(--primary-purple);
         }
 
         .client-logo img {
@@ -794,11 +659,6 @@
             overflow: hidden;
         }
 
-        body.light-theme .cta-section {
-            background: linear-gradient(135deg, rgba(139, 0, 255, 0.1), rgba(255, 0, 128, 0.1));
-            border: 1px solid rgba(139, 0, 255, 0.3);
-        }
-
         .cta-section::before {
             content: '';
             position: absolute;
@@ -808,10 +668,6 @@
             bottom: 0;
             background: linear-gradient(45deg, rgba(0, 255, 255, 0.05), rgba(139, 0, 255, 0.05));
             animation: pulse 3s infinite;
-        }
-
-        body.light-theme .cta-section::before {
-            background: linear-gradient(45deg, rgba(139, 0, 255, 0.05), rgba(255, 0, 128, 0.05));
         }
 
         @keyframes pulse {
@@ -829,10 +685,6 @@
             letter-spacing: 0.1em;
             position: relative;
             z-index: 1;
-        }
-
-        body.light-theme .cta-title {
-            color: var(--primary-purple);
         }
 
         /* Dropdown button styles */
@@ -860,18 +712,9 @@
             cursor: pointer;
         }
 
-        body.light-theme .cta-btn {
-            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
-            color: white;
-        }
-
         .cta-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
-        }
-
-        body.light-theme .cta-btn:hover {
-            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.4);
         }
 
         .dropdown-content {
@@ -890,11 +733,6 @@
             backdrop-filter: blur(10px);
         }
 
-        body.light-theme .dropdown-content {
-            border: 1px solid rgba(139, 0, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.2);
-        }
-
         .dropdown-container:hover .dropdown-content {
             display: block;
         }
@@ -911,10 +749,6 @@
             text-align: center;
         }
 
-        body.light-theme .dropdown-content a {
-            color: var(--primary-purple);
-        }
-
         .dropdown-content a:before {
             content: '';
             position: absolute;
@@ -926,10 +760,6 @@
             transition: left 0.5s ease;
         }
 
-        body.light-theme .dropdown-content a:before {
-            background: linear-gradient(90deg, transparent, rgba(139, 0, 255, 0.2), transparent);
-        }
-
         .dropdown-content a:hover:before {
             left: 100%;
         }
@@ -937,10 +767,6 @@
         .dropdown-content a:hover {
             background: rgba(0, 255, 255, 0.1);
             transform: translateX(5px);
-        }
-
-        body.light-theme .dropdown-content a:hover {
-            background: rgba(139, 0, 255, 0.1);
         }
 
         .dropdown-content a i {
@@ -951,10 +777,6 @@
 
         .dropdown-content a:first-child {
             border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        body.light-theme .dropdown-content a:first-child {
-            border-bottom: 1px solid rgba(139, 0, 255, 0.2);
         }
 
         @keyframes fadeIn {
@@ -968,10 +790,6 @@
             padding: 40px 0;
             text-align: center;
             border-top: 1px solid rgba(0, 255, 255, 0.1);
-        }
-
-        body.light-theme .footer {
-            border-top: 1px solid rgba(139, 0, 255, 0.1);
         }
 
         .footer-links {
@@ -989,10 +807,6 @@
 
         .footer-link:hover {
             color: var(--primary-cyan);
-        }
-
-        body.light-theme .footer-link:hover {
-            color: var(--primary-purple);
         }
 
         .copyright {
@@ -1026,6 +840,10 @@
             
             .section-title {
                 font-size: 2rem;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
             }
         }
     </style>
@@ -1204,6 +1022,19 @@
                     <p>Seamless launch with documentation and 30-day maintenance support.</p>
                 </div>
             </div>
+            
+            <!-- Contact options in process section -->
+            <div class="process-contact">
+                <h3>Ready to Start Your Project?</h3>
+                <div class="contact-buttons">
+                    <a href="mailto:soloautomations@proton.me?subject=Project%20Inquiry" class="contact-btn">
+                        <i class="fas fa-envelope"></i> SEND EMAIL
+                    </a>
+                    <a href="tel:+15615273900" class="contact-btn call-btn">
+                        <i class="fas fa-phone"></i> PLACE A CALL
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Stats Section -->
@@ -1259,8 +1090,12 @@
             <div class="dropdown-container">
                 <button class="cta-btn">START PROJECT</button>
                 <div class="dropdown-content">
-                    <a href="#" id="emailBtn"><i class="fas fa-envelope"></i> SEND EMAIL</a>
-                    <a href="#" id="callBtn"><i class="fas fa-phone"></i> PLACE A CALL</a>
+                    <a href="mailto:soloautomations@proton.me?subject=Project%20Inquiry" id="emailBtn">
+                        <i class="fas fa-envelope"></i> SEND EMAIL
+                    </a>
+                    <a href="tel:+15615273900" id="callBtn">
+                        <i class="fas fa-phone"></i> PLACE A CALL
+                    </a>
                 </div>
             </div>
         </div>
@@ -1277,60 +1112,24 @@
     </div>
 
     <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('change', () => {
-            document.body.classList.toggle('light-theme');
-            
-            // Save preference to localStorage
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // Check for saved theme preference
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-theme');
-            themeToggle.checked = true;
-        }
-
         // Cyberpunk animations and effects
         document.addEventListener('DOMContentLoaded', function() {
             // Glitch effect for title
             const glitchText = document.querySelector('.glitch');
             setInterval(() => {
                 if (Math.random() > 0.95) {
-                    const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
-                    if (currentTheme === 'dark') {
-                        glitchText.style.textShadow = `
-                            ${Math.random() * 5}px 0 #ff0080,
-                            ${Math.random() * -5}px 0 #00ffff,
-                            0 0 20px #00ffff
-                        `;
-                    } else {
-                        glitchText.style.textShadow = `
-                            ${Math.random() * 5}px 0 #ff0080,
-                            ${Math.random() * -5}px 0 #8b00ff,
-                            0 0 20px #8b00ff
-                        `;
-                    }
+                    glitchText.style.textShadow = `
+                        ${Math.random() * 5}px 0 #ff0080,
+                        ${Math.random() * -5}px 0 #00ffff,
+                        0 0 20px #00ffff
+                    `;
                     
                     setTimeout(() => {
-                        if (currentTheme === 'dark') {
-                            glitchText.style.textShadow = `
-                                0 0 10px var(--primary-cyan),
-                                0 0 20px var(--primary-cyan),
-                                0 0 40px var(--primary-cyan)
-                            `;
-                        } else {
-                            glitchText.style.textShadow = `
-                                0 0 10px rgba(139, 0, 255, 0.3),
-                                0 0 20px rgba(139, 0, 255, 0.2),
-                                0 0 40px rgba(139, 0, 255, 0.1)
-                            `;
-                        }
+                        glitchText.style.textShadow = `
+                            0 0 10px var(--primary-cyan),
+                            0 0 20px var(--primary-cyan),
+                            0 0 40px var(--primary-cyan)
+                        `;
                     }, 150);
                 }
             }, 3000);
@@ -1344,24 +1143,14 @@
                 }, 50);
             });
 
-            // Contact functionality
-            const emailBtn = document.getElementById('emailBtn');
-            const callBtn = document.getElementById('callBtn');
-
-            emailBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const email = 'soloautomations@proton.me';
-                const subject = 'Project Inquiry';
-                const body = 'Hello Solo Automation,\n\nI\'m interested in discussing a project.\n\n[Briefly describe your needs]';
-                window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            });
-
-            callBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const phoneNumber = '+15615273900';
-                window.location.href = `tel:${phoneNumber}`;
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('change', () => {
+                document.body.classList.toggle('light-theme');
             });
         });
     </script>
 </body>
 </html>
+            
+               
